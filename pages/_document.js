@@ -1,6 +1,6 @@
-import React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheets } from "@material-ui/styles";
+import React from 'react'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { ServerStyleSheets } from '@material-ui/styles'
 
 class MyDocument extends Document {
   render() {
@@ -24,10 +24,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,400;0,500;1,200;1,400&display=swap"
             rel="stylesheet"
           />
-          <link
-            href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
-            rel="stylesheet"
-          />
+          <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
         </Head>
         <body>
           <div id="page-transition"></div>
@@ -35,11 +32,11 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async ctx => {
   // Resolution order
   //
   // On the server:
@@ -63,15 +60,15 @@ MyDocument.getInitialProps = async (ctx) => {
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
+      enhanceApp: App => props => sheets.collect(<App {...props} />)
+    })
 
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps = await Document.getInitialProps(ctx)
 
   return {
     ...initialProps,
@@ -80,9 +77,9 @@ MyDocument.getInitialProps = async (ctx) => {
       <React.Fragment key="styles">
         {initialProps.styles}
         {sheets.getStyleElement()}
-      </React.Fragment>,
-    ],
-  };
-};
+      </React.Fragment>
+    ]
+  }
+}
 
-export default MyDocument;
+export default MyDocument
